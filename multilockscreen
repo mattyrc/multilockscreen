@@ -22,6 +22,7 @@ init_config () {
 	loginshadow=00000000
 	locktext="Type password to unlock..."
 	font="sans-serif"
+	time_format='%H:%M:%S'
 	ringcolor=ffffffff
 	insidecolor=00000000
 	separatorcolor=00000000
@@ -101,7 +102,7 @@ lock() {
 		--time-pos='ix-170:iy-0' \
 		--date-pos='ix-240:iy+25' \
 		--layout-pos='ix-90:iy-0' --layout-align 1 --layout-color=$layoutcolor $keylayout \
-		--clock --date-align 1 --date-str "$locktext" \
+		--clock --date-align 1 --date-str "$locktext" --time-str "$time_format" \
 		--inside-color=$insidecolor --ring-color=$ringcolor --line-uses-inside \
 		--keyhl-color=$keyhlcolor --bshl-color=$bshlcolor --separator-color=$separatorcolor \
 		--insidever-color=$insidevercolor --insidewrong-color=$insidewrongcolor \
@@ -673,6 +674,9 @@ usage() {
 	echo "  --show-layout"
 	echo "      Show current keyboard layout"
 	echo
+	echo "	--tf --time_format <FORMAT>"
+	echo "	    Set the time in strftime format"
+	echo
 	echo "  -- <ARGS>"
 	echo "      Pass additional arguments to i3lock"
 	echo
@@ -747,6 +751,11 @@ for arg in "$@"; do
 
 		--text)
 			locktext="$2"
+			shift 2
+			;;
+
+		-tf | --time_format)
+			time_format="$2"
 			shift 2
 			;;
 

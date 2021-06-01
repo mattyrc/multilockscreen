@@ -15,6 +15,7 @@ loginbox=00000066
 loginshadow=00000000
 locktext="Type password to unlock..."
 font="sans-serif"
+time_format="%H:%M:%S"
 ringcolor=ffffffff
 insidecolor=00000000
 separatorcolor=00000000
