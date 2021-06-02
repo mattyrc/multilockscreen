@@ -3,7 +3,6 @@
 # multilockscreen
 # i3lock wrapper with multi-monitor support
 # https://github.com/jeffmhubbard/multilockscreen
-
 init_config () {
 
 	# default options
@@ -86,7 +85,9 @@ prelock() {
 	then
 		dunstctl set-paused true
 	fi
+
 }
+
 
 # lock screen with specified image
 lock() {
@@ -95,11 +96,31 @@ lock() {
 
 	local image="$1"
 
+	#read $time_format
+	#if [[ ${#time_format} -ge 9 ]] ; then
+		#echo $time_format
+		#time_pos="ix-147:iy-0"	
+	#else
+		#time_pos="ix-170:iy-0"
+	#fi
+
+	if [[ ${#time_format} -ge 9 ]] ; then
+		echo $time_format
+		time_pos="ix-140:iy-0"		
+	elif [[ ${#time_format} -ge 6 ]] ; then
+		echo $time_format
+		time_pos="ix-170:iy-0"	
+	else
+		time_pos="ix-195:iy-0"
+	fi
+
+	echo $time_pos
+
 	i3lock \
 		-i "$image" \
 		-c "$bgcolor" \
 		--screen "$display_on" \
-		--time-pos='ix-170:iy-0' \
+		--time-pos=$time_pos \
 		--date-pos='ix-240:iy+25' \
 		--layout-pos='ix-90:iy-0' --layout-align 1 --layout-color=$layoutcolor $keylayout \
 		--clock --date-align 1 --date-str "$locktext" --time-str "$time_format" \
@@ -805,6 +826,15 @@ for arg in "$@"; do
 			;;
 	esac
 done
+
+
+#get_time_pos() {
+#if [[ ${#time_format} -gt 8 ]] ; then
+	#timepos='ix-147:iy-0'
+#else
+	#timepos='ix-170:iy-0'
+#fi
+#}
 
 # Run image generation
 [[ $runupdate ]] && update "${imagepaths[@]}"
