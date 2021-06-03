@@ -65,6 +65,9 @@ Additional arguments:
 
   --fx <EFFECT,EFFECT,EFFECT>
       List of effects to apply
+      
+  --tf --time_format <FORMAT>
+	  Set the time in strftime format
 
   -- <ARGS>
       Pass following arguments to i3lock
@@ -124,6 +127,7 @@ loginbox=00000066
 loginshadow=00000000
 locktext="Type password to unlock..."
 font="sans-serif"
+time_format="%H:%M:%S"
 ringcolor=ffffffff
 insidecolor=00000000
 separatorcolor=00000000
